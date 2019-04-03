@@ -3,8 +3,7 @@ const express = require('express');
 const crypto = require('crypto');
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const exec = require('child_process').exe;
-const http = require('http');
+const exec = require('child_process').exec;
 
 /* Segredo utilizado pelo webhook para assinar chamada */
 const segredo = process.env.PIPELINE_SEGREDO;
@@ -23,10 +22,9 @@ app.use(bodyParser.json());
 app.post('/pipelines/iforgot', function (req, res) {
     const bufferBody = new Buffer(JSON.stringify(req.body));
     const assinatura = "sha1=" + crypto.createHmac('sha1', segredo).update(bufferBody).digest('hex');
-    console.log(segredo);
-    console.log(req.headers);
-    console.log(assinatura);
+
     if (req.headers['x-hub-signature'] == assinatura) {
+        console.log(repositorio);
         exec('cd ' + repositorio + ' && git pull');
         res.json({ mensagem: 'Pipeline executado com sucesso!' });
     }
