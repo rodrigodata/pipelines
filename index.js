@@ -21,8 +21,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.post('/pipelines/iforgot', function (req, res) {
-
-    const assinatura = "sha1=" + crypto.createHmac('sha1', segredo).update(JSON.stringify(req.body)).digest('hex');
+    const bufferBody = new Buffer(JSON.stringify(req.body));
+    const assinatura = "sha1=" + crypto.createHmac('sha1', segredo).update(bufferBody).digest('hex');
     console.log(req.headers);
     console.log(assinatura);
     if (req.headers['x-hub-signature'] == assinatura) {
@@ -31,19 +31,6 @@ app.post('/pipelines/iforgot', function (req, res) {
     }
 
 });
-
-// http.createServer(function (req, res) {
-//     req.on('data', function (chunk) {
-//         console.log(chunk.toString());
-//         let sig = "sha1=" + crypto.createHmac('sha1', segredo).update(chunk.toString()).digest('hex');
-
-//         if (req.headers['x-hub-signature'] == sig) {
-//             exec('cd ' + repo + ' && git pull');
-//         }
-//     });
-
-//     res.end();
-// }).listen(8082);
 
 app.listen(8082, function () {
     console.log('Projeto Pipeline rodando na porta 8082');
