@@ -16,9 +16,9 @@ const repositorio = "~/iforgot";
 const app = express();
 
 /* Utilizando apenas de segurança. */
-// app.use(cors());
-// app.use(bodyParser.urlencoded({ extended: false }));
-// app.use(bodyParser.json());
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.post('/pipelines/iforgot', function (req, res) {
     console.log(req.body.toString());
