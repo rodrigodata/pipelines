@@ -1,0 +1,19 @@
+{
+    "name": "pipelines",
+    "version": "0.0.1",
+    "description": "Projeto experimental para pipelines",
+    "main": "index.js",
+    "scripts": {
+        "start:dev": "nodemon server.js"
+    },
+    "author": "Rodrigo Andrade",
+    "license": "ISC",
+    "dependencies": {
+        "express": "4.16.4",
+        "body-parser": "1.18.3",
+        "cors": "2.8.5"
+    },
+    "devDependencies": {
+        "nodemon": "1.18.10"
+    }
+}
