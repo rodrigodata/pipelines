@@ -21,7 +21,7 @@ const app = express();
 // app.use(bodyParser.json());
 
 app.post('/pipelines/iforgot', function (req, res) {
-    console.log(req.body.toString();
+    console.log(req.body.toString());
     const assinatura = "sha1=" + crypto.createHmac('sha1', segredo).update(req.body.toString()).digest('hex');
     console.log(req.headers);
     console.log(assinatura);
