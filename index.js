@@ -10,6 +10,7 @@ const segredo = process.env.PIPELINE_SEGREDO;
 
 /* Local do projeto a ser feito o pipeline */
 const repositorio = "~/iforgot";
+const pm2Process = "iforgot";
 
 /* Inicialização da aplicação */
 const app = express();
@@ -24,8 +25,7 @@ app.post('/pipelines/iforgot', function (req, res) {
     const assinatura = "sha1=" + crypto.createHmac('sha1', segredo).update(bufferBody).digest('hex');
 
     if (req.headers['x-hub-signature'] == assinatura) {
-        console.log(repositorio);
-        exec('cd ' + repositorio + ' && git pull');
+        exec(`cd ${repositorio} && git pull && pm2 restart ${pm2Process}`);
         res.json({ mensagem: 'Pipeline executado com sucesso!' });
     }
 
