@@ -33,8 +33,8 @@ app.use(bodyParser.json());
 
 http.createServer(function (req, res) {
     req.on('data', function (chunk) {
-        console.log(chunk);
-        let sig = "sha1=" + crypto.createHmac('sha1', secret).update(chunk.toString()).digest('hex');
+        console.log(chunk.toString());
+        let sig = "sha1=" + crypto.createHmac('sha1', segredo).update(chunk.toString()).digest('hex');
 
         if (req.headers['x-hub-signature'] == sig) {
             exec('cd ' + repo + ' && git pull');
