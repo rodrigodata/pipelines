@@ -21,7 +21,7 @@ app.use(bodyParser.json());
 
 app.post('/pipelines/iforgot', function (req, res) {
     const assinatura = "sha1=" + crypto.createHmac('sha1', segredo).update(req.body.toString()).digest('hex');
-    console.log(segredo);
+    console.log(req.headers);
     console.log(assinatura);
     if (req.headers['x-hub-signature'] == assinatura) {
         exec('cd ' + repositorio + ' && git pull');
