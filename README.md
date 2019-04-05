@@ -1,4 +1,4 @@
 # Pipelines
 
-Pipeline com integração de GitHubs Webhooks + DigitalOcean Droplets.
+Pipeline com integração de Webhooks do Github + DigitalOcean Droplets.
 
